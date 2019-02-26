@@ -1,0 +1,28 @@
+{% extends "index.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+{% if registered %}
+
+<strong>Thank you for registering!</strong>
+
+<a href="{% url 'journal:landing_page' %}">Return home</a><br/>
+
+{% else %}
+
+<h1>FlightList Registration</h1>
+
+<form id="user_form" method="post" action="{% url 'journal:register' %}" enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+    {{ user_form.as_p }}
+
+    <input id="register_new" type="submit" name="submit" value="Register"/>
+</form>
+
+{% endif %}
+
+{% endblock content %}
