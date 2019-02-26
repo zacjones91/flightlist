@@ -1,0 +1,49 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% load static %}
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'journal/index.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/css/uikit.min.css" />
+
+    <title>FlightList</title>
+
+</head>
+
+<body>
+    {% block nav %}
+    {% include "nav.html" %}
+    {% endblock nav %}
+
+    {% block content %}
+
+    {% if user.is_authenticated %}
+
+    <div class="">
+        <p class="blueboi">Hey there.</p>
+    </div>
+
+    {% else %}
+
+    <h1 class="">FlightList</h1>
+
+    <h2>Log in or register!</h2>
+
+    <p>Log in to see your journal.</p>
+
+    {% endif %}
+
+    {% endblock content %}
+
+    <!-- UIkit JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit-icons.min.js"></script>
+
+</body>
+
+</html>
