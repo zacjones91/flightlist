@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404, get_list_or_404, redirec
 from django.template import RequestContext
 from django.urls import reverse
 from journal.models import *
-from journal.forms import UserForm
+from journal.forms import *
 
 def landing_page(request):
 
@@ -75,3 +75,32 @@ def user_logout(request):
     # Since we know the user is logged in, we can now just log them out.
     logout(request)
     return HttpResponseRedirect('journal')
+
+# ============================ Entries =========================== #
+
+def all_entries(request, pk):
+    
+    all_entries = Entry.objects.filter(user_id=pk).order_by('date')
+    context = {'all_entries': all_entries}
+    return render(request, 'all_entries.html', context)
+
+# get and create new
+
+def new_entry(request, pk):
+
+    if request.method == 'GET':
+        journal_form = JournalForm()
+        context = {'journal_form': journal_form}
+        return render(request, 'new_entry.html', context)
+
+    if request.method == 'POST':
+    
+        title = request.POST['title']
+        content = request.POST['content']
+        date = request.POST['date']
+        image = request.POST['image']
+        
+        journal_to_save = Entry(title=title, date=date, content=content, image=image, user_id=request.user.id)
+        journal_to_save.save()
+
+        return HttpResponseRedirect(reverse('journal:all_entries', args=(request.user.id,)))

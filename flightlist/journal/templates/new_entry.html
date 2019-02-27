@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<h2>Create FlightList Entry</h2>
+
+<form class="" method="post" action="{% url 'journal:new_entry' user.id %}" enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+    {{journal_form}}
+
+    <input class="" type='submit' value="Save"/>
+
+</form>
+
+{% endblock content %}
