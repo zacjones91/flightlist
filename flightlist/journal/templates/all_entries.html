@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+{% if all_entries %}
+
+<h2>Your FlightList Entries</h2>
+
+{% for entry in all_entries %}
+
+<p>{{ entry.title }}</p>
+
+{% endfor %}
+
+{% else %}
+
+<h2>You don't have any entries yet!</h2>
+
+{% endif %}
+
+{% endblock %}

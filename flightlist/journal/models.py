@@ -3,10 +3,10 @@ from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Entry(models.Model):
-    title = models.CharField(max_length = 80)
+    title = models.CharField(max_length = 50)
     content = models.TextField(blank=True)
     date = models.DateField()
-    image = models.CharField(max_length = 300)
+    image = models.CharField(max_length = 200)
     user = models.ForeignKey(
         User,
         on_delete=models.DO_NOTHING,
