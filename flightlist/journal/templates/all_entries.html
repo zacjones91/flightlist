@@ -12,6 +12,10 @@
 
 <p>{{ entry.title }}</p>
 
+<p>
+    <a href="{% url 'journal:detail' entry.id %}">Details</a>
+</p>
+
 {% endfor %}
 
 {% else %}

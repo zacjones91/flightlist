@@ -11,4 +11,6 @@ urlpatterns = [
     path('register', views.register, name='register'),
     path('journal/all_entries/<int:pk>', views.all_entries, name='all_entries'),
     path('journal/new_entry/<int:pk>', views.new_entry, name='new_entry'),
+    path('journal/edit_entry/<int:pk>', views.edit_entry, name='edit_entry'),
+    path('journal/detail/<int:pk>', views.detail, name='detail'),
 ]
