@@ -1,54 +1,85 @@
-{% load staticfiles %}
+{% load staticfiles %} {% block nav %} {% if user.is_authenticated %}
 
-{% block nav %}
-
-{% if user.is_authenticated %}
-
-<nav class="uk-navbar-container uk-navbar">
-
-    <div class="uk-navbar-left">
-
-        <ul class="uk-navbar-nav">
-            <li class=""><a href="{% url 'journal:landing_page' %}">Home</a></li>
-            <li><a href="{% url 'journal:all_entries' user.id %}">Entries</a></li>
-            <li><a href="{% url 'journal:new_entry' user.id %}">New Entry</a></li>
-        </ul>
-
+<nav class="top-bar topbar-responsive">
+    <div class="top-bar-title">
+        <!-- <span data-responsive-toggle="topbar-responsive" data-hide-for="medium">
+            <button class="menu-icon" type="button" data-toggle></button>
+        </span> -->
+        <a
+            class="topbar-responsive-logo"
+            href="{% url 'journal:landing_page' %}"
+            ><strong>FlightList</strong></a
+        >
     </div>
-
-    <div class="uk-navbar-right">
-
-        <ul class="uk-navbar-nav">
-            <li class=""><a href="{% url 'journal:logout' %}">Logout</a></li>
-        </ul>
-
+    <div id="topbar-responsive" class="topbar-responsive-links">
+        <div class="top-bar-right">
+            <ul class="menu simple vertical medium-horizontal">
+                <li><a href="{% url 'journal:landing_page' %}">Home</a></li>
+                <li>
+                    <a href="{% url 'journal:all_entries' user.id %}"
+                        >All Entries</a
+                    >
+                </li>
+                <li>
+                    <a href="{% url 'journal:new_entry' user.id %}"
+                        >New Entry</a
+                    >
+                </li>
+                <li>
+                    <a href="{% url 'journal:logout' %}">
+                        <button
+                            type="button"
+                            class="button hollow topbar-responsive-button"
+                        >
+                            Log Out
+                        </button>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
-
 </nav>
 
 {% else %}
 
-<nav class="uk-navbar-container uk-navbar">
-
-    <div class="uk-navbar-left">
-
-        <div class="uk-navbar-item">
-            <a href="{% url 'journal:landing_page' %}">FlightList</a>
+<nav class="top-bar topbar-responsive">
+    <div class="top-bar-title">
+        <!-- <span data-responsive-toggle="topbar-responsive" data-hide-for="medium">
+                <button class="menu-icon" type="button" data-toggle></button>
+            </span> -->
+        <a
+            class="topbar-responsive-logo"
+            href="{% url 'journal:landing_page' %}"
+            ><strong>FlightList</strong></a
+        >
+    </div>
+    <div id="topbar-responsive" class="topbar-responsive-links">
+        <div class="top-bar-right">
+            <ul class="menu simple vertical medium-horizontal">
+                <li><a href="{% url 'journal:landing_page' %}">Home</a></li>
+                <li>
+                    <a href="{% url 'journal:login' %}">
+                        <button
+                            type="button"
+                            class="button hollow topbar-responsive-button"
+                        >
+                            Log In
+                        </button></a
+                    >
+                </li>
+                <li>
+                        <a href="{% url 'journal:register' %}">
+                            <button
+                                type="button"
+                                class="button hollow topbar-responsive-button"
+                            >
+                                Register
+                            </button></a
+                        >
+                    </li>
+            </ul>
         </div>
-
     </div>
-
-    <div class="uk-navbar-right">
-
-        <ul class="uk-navbar-nav">
-            <li class=""><a href="{% url 'journal:login' %}">Login</a></li>
-            <li><a href="{% url 'journal:register' %}">Register</a></li>
-        </ul>
-
-    </div>
-
 </nav>
 
-{% endif %}
-
-{% endblock %}
+{% endif %} {% endblock %}
