@@ -9,7 +9,10 @@
     {% load static %}
     
     <link rel="stylesheet" type="text/css" href="{% static 'journal/index.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/css/uikit.min.css" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/css/uikit.min.css" /> -->
+    <!-- Compressed CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css" integrity="sha256-xpOKVlYXzQ3P03j397+jWFZLMBXLES3IiryeClgU5og= sha384-gP4DhqyoT9b1vaikoHi9XQ8If7UNLO73JFOOlQV1RATrA7D0O7TjJZifac6NwPps sha512-AKwIib1E+xDeXe0tCgbc9uSvPwVYl6Awj7xl0FoaPFostZHOuDQ1abnDNCYtxL/HWEnVOMrFyf91TDgLPi9pNg==" crossorigin="anonymous">
+
 
     <title>FlightList</title>
 
@@ -26,7 +29,10 @@
 
     <div class="">
         <h1>FlightList</h1>
-        <p class="blueboi">Hey there. You're logged in.</p>
+        <p class="">Hey there, welcome to FlightList. You're logged in and ready for takeoff.</p>
+        <!-- <img src="https://image.flaticon.com/icons/svg/61/61212.svg"> -->
+        <iframe src="https://giphy.com/embed/TgJ0KKEY8HByASy6Jt" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/world-travel-sky-TgJ0KKEY8HByASy6Jt"></a></p>
+        <p>FlightList is the premier location to record your journal entries about aviation.</p>
     </div>
 
     {% else %}
@@ -35,13 +41,20 @@
 
     <h2>Log in or register to see your FlightList!</h2>
 
+    <!-- <img src="https://image.flaticon.com/icons/svg/61/61212.svg"> -->
+
+    <p>FlightList is the premier location to record your journal entries about aviation.</p>
+
     {% endif %}
 
     {% endblock content %}
 
-    <!-- UIkit JS -->
+    <!-- UIkit JS
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit-icons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit-icons.min.js"></script> -->
+
+    <!-- Compressed JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js" integrity="sha256-/PFxCnsMh+nTuM0k3VJCRch1gwnCfKjaP8rJNq5SoBg= sha384-9ksAFjQjZnpqt6VtpjMjlp2S0qrGbcwF/rvrLUg2vciMhwc1UJJeAAOLuJ96w+Nj sha512-UMSn6RHqqJeJcIfV1eS2tPKCjzaHkU/KqgAnQ7Nzn0mLicFxaVhm9vq7zG5+0LALt15j1ljlg8Fp9PT1VGNmDw==" crossorigin="anonymous"></script>
 
 </body>
 

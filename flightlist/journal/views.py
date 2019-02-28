@@ -7,9 +7,11 @@ from django.urls import reverse
 from journal.models import *
 from journal.forms import *
 
+
 def landing_page(request):
 
     return render(request, 'index.html')
+
 
 def register(request):
     '''Handles the creation of a new user for authentication
@@ -29,7 +31,7 @@ def register(request):
             user.set_password(user.password)
             user.save()
             return login_user(request)
-    
+
         else:
             print("not valid user form")
 
@@ -38,6 +40,7 @@ def register(request):
         context = {'user_form': user_form}
         template_name = 'register.html'
         return render(request, template_name, context)
+
 
 def login_user(request):
     '''Handles the creation of a new user for authentication
@@ -52,8 +55,8 @@ def login_user(request):
     if request.method == 'POST':
 
         # Use the built-in authenticate method to verify
-        username=request.POST['username']
-        password=request.POST['password']
+        username = request.POST['username']
+        password = request.POST['password']
         authenticated_user = authenticate(username=username, password=password)
 
         # If authentication was successful, log the user in
@@ -66,7 +69,6 @@ def login_user(request):
             print("Invalid login details: {}, {}".format(username, password))
             return HttpResponse("Invalid login details supplied.")
 
-
     return render(request, 'login.html', {}, context)
 
 # Use the login_required() decorator to ensure only those logged in can access the view.
@@ -78,13 +80,15 @@ def user_logout(request):
 
 # ============================ Entries =========================== #
 
+
 def all_entries(request, pk):
-    
+
     all_entries = Entry.objects.filter(user_id=pk).order_by('date')
     context = {'all_entries': all_entries}
     return render(request, 'all_entries.html', context)
 
 # get and create new
+
 
 def new_entry(request, pk):
 
@@ -94,13 +98,61 @@ def new_entry(request, pk):
         return render(request, 'new_entry.html', context)
 
     if request.method == 'POST':
-    
+
         title = request.POST['title']
         content = request.POST['content']
         date = request.POST['date']
         image = request.POST['image']
-        
-        journal_to_save = Entry(title=title, date=date, content=content, image=image, user_id=request.user.id)
+
+        journal_to_save = Entry(
+            title=title, date=date, content=content, image=image, user_id=request.user.id)
         journal_to_save.save()
 
         return HttpResponseRedirect(reverse('journal:all_entries', args=(request.user.id,)))
+
+# detail view
+
+def detail(request, pk):
+
+    entry = Entry.objects.filter(id=pk)
+    context = {'entry': entry}
+    return render(request, 'detail.html', context)    
+
+
+def edit_entry(request, pk):
+
+    if request.method == 'GET':
+        entry_to_edit = Entry.objects.get(id=pk)
+        journal_form = JournalForm(
+            initial={
+                'title': entry_to_edit.title,
+                'content': entry_to_edit.content,
+                'date': entry_to_edit.date,
+                'image': entry_to_edit.image
+            }
+        )
+        context = {'journal_form': journal_form, 'entry_to_edit': entry_to_edit}
+        return render(request, 'edit_entry.html', context)
+
+    if request.method == 'POST':
+
+        entry_to_edit = Entry.objects.get(id=request.POST['entry_id'])
+
+        title = request.POST['title']
+        content = request.POST['content']
+        date = request.POST['date']
+        image = request.POST['image']
+        entry_id = request.POST['entry_id']
+
+        journal_to_save = Entry(
+            pk=entry_id, title=title, date=date, content=content, image=image, user_id=request.user.id)
+        journal_to_save.save()
+
+        return HttpResponseRedirect(reverse('journal:all_entries', args=(request.user.id,)))
+
+#  delete an entry
+
+def delete_entry(request, pk):
+    to_delete = Entry.objects.get(id=pk)
+    to_delete.delete()
+    return HttpResponseRedirect(reverse('journal:all_entries', args=(request.user.id,)))

@@ -1,16 +1,42 @@
-{% extends "index.html" %}
-
-{% load staticfiles %}
-
-{% block content %}
+{% extends "index.html" %} {% load staticfiles %} {% block content %} 
 
 {% if all_entries %}
 
 <h2>Your FlightList Entries</h2>
 
+<div class="grid-x">
+
 {% for entry in all_entries %}
 
-<p>{{ entry.title }}</p>
+<div class="cell small-3">
+        <div class="card-user-profile">
+            <img
+                class="card-user-profile-img"
+                src={{entry.image}}
+            />
+            <div class="card-user-profile-content card-section">
+
+                <p class="card-user-profile-name">{{entry.title}}</p>
+                <p class="card-user-profile-status">{{entry.date}}</p>
+                <p class="card-user-profile-info">
+                    {{entry.content}}
+                </p>
+            </div>
+
+            <div class="card-user-profile-actions">
+                <a href="{% url 'journal:detail' entry.id %}" class="card-user-profile-button button hollow"
+                    >Details</a
+                >
+                <a
+                    href="{% url 'journal:delete_entry' entry.id %}"
+                    class="card-user-profile-button button hollow secondary"
+                    onclick="return confirm('Are you sure?');"
+                    >Delete</a
+                >
+            </div>
+        </div>
+    </div>
+
 
 {% endfor %}
 
@@ -18,6 +44,4 @@
 
 <h2>You don't have any entries yet!</h2>
 
-{% endif %}
-
-{% endblock %}
+{% endif %} {% endblock %}

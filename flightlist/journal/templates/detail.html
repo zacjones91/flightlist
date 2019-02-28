@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<h2>Entry Detail</h2>
+
+{% for entry in entry %}
+
+    <h3> {{ entry.title }} </h3>
+
+    <p>{{ entry.date }}</p>
+
+    <p> {{ entry.content }} </p>
+
+    <img src={{entry.image}}>
+
+    <p>
+        <a href="{% url 'journal:edit_entry' entry.id %}">Edit</a>
+    </p>
+
+{% endfor %}
+
+
+
+{% endblock %}

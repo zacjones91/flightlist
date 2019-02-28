@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<h2>Edit FlightList Entry</h2>
+
+<form class="" method="post" action="{% url 'journal:edit_entry' user.id %}" enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+    {{journal_form}}
+    
+    <input type='hidden' name="entry_id" id='entry_id' value="{{entry_to_edit.id}}">
+
+    <input class="" type='submit' value="Save"/>
+
+</form>
+
+{% endblock content %}
