@@ -144,6 +144,7 @@
     box-shadow: none;
     overflow: hidden;
     color: #0a0a0a;
+    margin: 10px;
 }
 
 .card-user-profile > :last-child {

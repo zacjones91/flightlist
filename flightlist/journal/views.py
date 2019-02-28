@@ -121,9 +121,8 @@ def detail(request, pk):
 
 def edit_entry(request, pk):
 
-    entry_to_edit = Entry.objects.get(id=pk)
-
     if request.method == 'GET':
+        entry_to_edit = Entry.objects.get(id=pk)
         journal_form = JournalForm(
             initial={
                 'title': entry_to_edit.title,
@@ -136,6 +135,8 @@ def edit_entry(request, pk):
         return render(request, 'edit_entry.html', context)
 
     if request.method == 'POST':
+
+        entry_to_edit = Entry.objects.get(id=request.POST['entry_id'])
 
         title = request.POST['title']
         content = request.POST['content']
