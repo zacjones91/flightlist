@@ -11,6 +11,8 @@
     {% csrf_token %}
 
     {{journal_form}}
+    
+    <input type='hidden' name="entry_id" id='entry_id' value="{{entry_to_edit.id}}">
 
     <input class="" type='submit' value="Save"/>
 

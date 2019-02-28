@@ -132,7 +132,7 @@ def edit_entry(request, pk):
                 'image': entry_to_edit.image
             }
         )
-        context = {'journal_form': journal_form}
+        context = {'journal_form': journal_form, 'entry_to_edit': entry_to_edit}
         return render(request, 'edit_entry.html', context)
 
     if request.method == 'POST':
@@ -141,9 +141,10 @@ def edit_entry(request, pk):
         content = request.POST['content']
         date = request.POST['date']
         image = request.POST['image']
+        entry_id = request.POST['entry_id']
 
         journal_to_save = Entry(
-            title=title, date=date, content=content, image=image, user_id=request.user.id)
+            pk=entry_id, title=title, date=date, content=content, image=image, user_id=request.user.id)
         journal_to_save.save()
 
         return HttpResponseRedirect(reverse('journal:all_entries', args=(request.user.id,)))
