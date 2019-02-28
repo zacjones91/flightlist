@@ -148,3 +148,10 @@ def edit_entry(request, pk):
         journal_to_save.save()
 
         return HttpResponseRedirect(reverse('journal:all_entries', args=(request.user.id,)))
+
+#  delete an entry
+
+def delete_entry(request, pk):
+    to_delete = Entry.objects.get(id=pk)
+    to_delete.delete()
+    return HttpResponseRedirect(reverse('journal:all_entries', args=(request.user.id,)))

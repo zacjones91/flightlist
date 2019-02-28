@@ -183,9 +183,9 @@
     display: flex;
 }
 
-.card-user-profile-actions > :last-child {
+/* .card-user-profile-actions > :last-child {
     margin-bottom: 0;
-}
+} */
 
 .card-user-profile-img {
     max-width: 100%;
